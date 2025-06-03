@@ -4,11 +4,13 @@ import { useSkillTree } from "../context/SkillTreeContext";
 
 const SkillNodeModal: React.FC<{node: SkillNode, onClose: () => void}> = ({ node, onClose }) => {
   const { skills, setSkills } = useSkillTree();
-  const minLevel = (node as any).minLevel ?? 0; // fallback to 0 if minLevel is not defined
+  // Provide sensible defaults if minLevel/maxLevel are missing
+  const minLevel = (node as any).minLevel ?? 0;
+  const maxLevel = (node as any).maxLevel ?? 5;
   const [level, setLevel] = useState(node.level);
 
   const handleLevelUp = () => {
-    if (level < node.maxLevel) setLevel(level + 1);
+    if (level < maxLevel) setLevel(level + 1);
   };
   const handleLevelDown = () => {
     if (level > minLevel) setLevel(level - 1);
@@ -37,11 +39,11 @@ const SkillNodeModal: React.FC<{node: SkillNode, onClose: () => void}> = ({ node
         <p style={{marginBottom: 12}}>{node.description}</p>
         {/* Progress bar */}
         <div style={{margin: "1em 0"}}>
-          <div style={{marginBottom: 4}}>Level: {level}/{node.maxLevel}</div>
+          <div style={{marginBottom: 4}}>Level: {level}/{maxLevel}</div>
           <div style={{background: "#444", borderRadius: 7, height: 14}}>
             <div
               style={{
-                width: `${(level / node.maxLevel) * 100}%`,
+                width: `${(level / maxLevel) * 100}%`,
                 height: "100%",
                 background: "linear-gradient(90deg,#fa5252,#ffd700,#4caf50,#2196f3)",
                 borderRadius: 7
@@ -72,7 +74,7 @@ const SkillNodeModal: React.FC<{node: SkillNode, onClose: () => void}> = ({ node
         {/* Level controls */}
         <div style={{display: "flex", justifyContent: "center", gap: 12, margin: "1em 0"}}>
           <button onClick={handleLevelDown} disabled={level <= minLevel}>-</button>
-          <button onClick={handleLevelUp} disabled={level >= node.maxLevel}>+</button>
+          <button onClick={handleLevelUp} disabled={level >= maxLevel}>+</button>
         </div>
         <div style={{display: "flex", justifyContent: "space-between"}}>
           <button onClick={onClose} style={{marginTop: 12}}>Cancel</button>
