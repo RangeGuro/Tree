@@ -1,0 +1,112 @@
+.modal-overlay {
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(20, 24, 32, 0.35);
+  backdrop-filter: blur(2.5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.skill-tab-popup {
+  position: relative;
+  min-width: 320px;
+  max-width: 420px;
+  z-index: 1000;
+  border-radius: 18px;
+  box-shadow: 0 8px 64px #0005;
+  padding: 30px 28px 22px 28px;
+  animation: fadein 180ms;
+  border: 2px solid #23283a13;
+
+  /* Subtle texture background for the tab! */
+  background: url("/tab-texture.svg"), rgba(255,255,255,0.97);
+  background-size: 120px 120px;
+  background-blend-mode: lighten;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(25px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.skill-tab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.skill-tab-title {
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-right: 8px;
+  letter-spacing: 0.5px;
+}
+
+.skill-tab-close {
+  font-size: 1.5rem;
+  border: 1.5px solid;
+  border-radius: 50%;
+  background: transparent;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.skill-tab-close:hover {
+  background: #fff2;
+}
+
+.skill-tab-path {
+  font-size: 0.95em;
+  margin-bottom: 12px;
+}
+
+.skill-tab-section {
+  margin: 10px 0;
+}
+
+.skill-tab-section ul {
+  padding-left: 1.2em;
+  margin: 0.5em 0 0 0;
+}
+.skill-tab-section li {
+  margin-bottom: 2px;
+}
+
+.skill-tab-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.skill-tab-actions button {
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  padding: 7px 14px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px #0002;
+  font-size: 1em;
+  transition: background 0.14s;
+}
+.skill-tab-actions button:hover {
+  background: #eaeaea !important;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  background: #fff2;
+  border-radius: 8px;
+  height: 18px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: #fff;
+  transition: width 0.2s;
+  border-radius: 8px;
+}

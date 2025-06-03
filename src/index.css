@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #181c24;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+}
+a {
+  text-decoration: none;
+}
+button {
+  background: #ffdf58;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4em 1.2em;
+  color: #23283a;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0 3px;
+  transition: background 0.2s;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
