@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700,600,400&display=swap');
+
+.achievements-main {
+  padding: 2em 3vw;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #23283a 0%, #31364b 100%);
+  font-family: 'Montserrat', 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+}
+
+/* Centered, boxed headline */
+.achievements-headline-box {
+  max-width: 480px;
+  margin: 0 auto 2.5em auto;
+  background: linear-gradient(100deg, #212640 65%, #202335 100%);
+  border-radius: 19px;
+  box-shadow: 0 6px 36px #0005;
+  padding: 2em 2em 1.2em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2.7px solid #b9f2ff33;
+  position: relative;
+}
+.achievements-title {
+  color: #fff;
+  font-size: 2.3em;
+  margin-bottom: 0.7em;
+  letter-spacing: 2px;
+  font-family: 'Montserrat', 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+  font-weight: 700;
+  text-shadow: 0 2px 10px #0006;
+}
+.achievements-title-centered {
+  text-align: center;
+  width: 100%;
+}
+.achievements-total-progress-label {
+  color: #23283a;
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-bottom: 0.7em;
+  letter-spacing: 1px;
+  text-align: center;
+  text-shadow: 0 1px 4px #fff7, 0 1px 0 #ffd700;
+}
+
+.achievements-total-progress-bar-outer {
+  width: 100%;
+  background: #353a51;
+  border-radius: 9px;
+  height: 19px;
+  overflow: hidden;
+  margin-bottom: 0.3em;
+  box-shadow: 0 2px 9px #0002;
+}
+.achievements-total-progress-bar-inner {
+  height: 100%;
+  border-radius: 9px;
+  transition: width .6s cubic-bezier(.64,1.55,.53,.92), background .2s;
+  background: #b9f2ff;
+  min-width: 3%;
+}
+
+.achievements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: flex-start;
+}
+
+.achievement-card {
+  border-radius: 14px;
+  padding: 1.6em 1.7em 1.1em 1.7em;
+  min-width: 230px;
+  max-width: 270px;
+  min-height: 220px;
+  box-shadow: 0 4px 24px #0005;
+  font-size: 1.12em;
+  color: #23283a;
+  border: 3px solid #b9f2ff;
+  text-align: left;
+  transition: border-color .2s, box-shadow .2s, transform .09s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Montserrat', 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+  font-weight: 600;
+}
+.achievement-card:focus, .achievement-card:hover {
+  outline: none;
+  box-shadow: 0 8px 32px #000b, 0 0 0 3px #b9f2ff66;
+  transform: scale(1.035);
+}
+.achievement-header {
+  font-weight: 700;
+  font-size: 1.35em;
+  margin-bottom: 0.3em;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 7px #fff4, 0 1px 0 #fff8;
+}
+.achievement-desc {
+  font-size: 1.03em;
+  opacity: 0.94;
+  margin-bottom: 1em;
+  font-weight: 400;
+  font-family: inherit;
+}
+.achievement-progress-bar {
+  background: #353a51cc;
+  border-radius: 7px;
+  height: 13px;
+  margin-bottom: 0.6em;
+  width: 100%;
+  overflow: hidden;
+}
+.achievement-progress {
+  height: 100%;
+  border-radius: 7px;
+  transition: width .4s;
+}
+.achievement-status {
+  font-size: 1em;
+  font-weight: 700;
+  margin: 0.8em 0 0.2em 0;
+  text-align: left;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 4px #fff7;
+}
+.achievement-status.unlocked { color: #50fa7b; }
+.achievement-status.locked { color: #fa5252; }
+.achievement-requirements {
+  font-size: 0.93em;
+  opacity: 0.84;
+  margin-top: 0.7em;
+  font-weight: 500;
+}
+.achievement-requirements ul {
+  margin: 0.2em 0 0 1.2em;
+  padding: 0;
+  list-style: disc;
+  font-size: 0.93em;
+  font-family: inherit;
+}
+
+/* Modal styles */
+.achievement-modal-backdrop {
+  position: fixed;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.64);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+}
+.achievement-modal {
+  /* bg set inline for dynamic gradient */
+  color: #23283a;
+  border-radius: 21px;
+  box-shadow: 0 8px 44px #000c;
+  padding: 2.3em 2.4em 2em 2.4em;
+  min-width: 320px;
+  max-width: 95vw;
+  position: relative;
+  animation: modalIn .22s cubic-bezier(.7,1.7,.5,1.01);
+  font-family: 'Montserrat', 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+  font-weight: 600;
+}
+@keyframes modalIn {
+  from { transform: scale(0.85) translateY(60px); opacity: 0;}
+  to { transform: scale(1) translateY(0); opacity: 1;}
+}
+.achievement-modal-close {
+  position: absolute;
+  top: 13px; right: 15px;
+  background: none;
+  color: #23283a;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity .12s;
+}
+.achievement-modal-close:hover { opacity: 1; }
+.achievement-modal-title {
+  font-size: 1.55em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  color: #23283a;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 7px #fff5;
+}
+.achievement-modal-desc {
+  font-size: 1.09em;
+  opacity: 0.95;
+  margin-bottom: 0.8em;
+  font-weight: 400;
+}
+.achievement-modal-details {
+  font-size: 1em;
+  color: #23283a;
+  font-family: inherit;
+}
+.achievement-modal-details ul {
+  margin: 0.2em 0 0 1.2em;
+  padding: 0;
+  list-style: disc;
+  font-size: 0.97em;
+}

@@ -1,15 +1,194 @@
 .landing {
   max-width: 900px;
   margin: 2em auto;
-  padding: 1em;
-  background: #2b3042;
-  box-shadow: 0 2px 20px #0003;
-  border-radius: 16px;
+  padding: 2em 2em 3em 2em;
+  background: linear-gradient(120deg, #23283a 60%, #2b3042 100%);
+  box-shadow: 0 8px 40px #0006;
+  border-radius: 22px;
   color: #fff;
+  position: relative;
+  min-height: 90vh;
 }
 .landing h1 {
   text-align: center;
-  color: #ffdf58;
   font-weight: bold;
-  margin-bottom: 1.5em;
+  margin-bottom: 0.7em;
+  font-size: 2.7em;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+.diamond-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #b9f2ff 60%, #78c5d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.landing-lead {
+  text-align: center;
+  color: #e0e0e0;
+  font-size: 1.3em;
+  margin-bottom: 2.1em;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Dashboard stats row */
+.dashboard-stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 2.2em;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
+}
+.dashboard-stat {
+  background: linear-gradient(90deg, #3a3f58 0%, #23283a 100%);
+  color: #b9f2ff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0002;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 1em 1.6em;
+  min-width: 142px;
+  font-size: 1.06em;
+}
+.dashboard-stat-icon {
+  font-size: 2em;
+  margin-right: 0.4em;
+}
+.dashboard-stat-label {
+  font-size: 0.99em;
+  font-weight: bold;
+  display: block;
+}
+.dashboard-stat-value {
+  font-size: 1.20em;
+  letter-spacing: 0.01em;
+  display: block;
+}
+
+/* Feature Highlights */
+.feature-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.7em;
+  justify-content: center;
+  margin-bottom: 2.3em;
+}
+.feature-card {
+  background: #23283a;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #0003;
+  padding: 1.2em 1.2em 1.1em 1.2em;
+  width: 180px;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.15s;
+}
+.feature-card:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 4px 24px #0005;
+}
+.feature-icon {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 0.5em;
+}
+.feature-card h3 {
+  margin: 0.1em 0 0.3em 0;
+  font-size: 1.18em;
+  color: #b9f2ff;
+}
+.feature-card p {
+  font-size: 1em;
+  color: #e0e0e0;
+}
+
+/* Animated Progress Bar */
+.animated-demo-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.7em 0 2.3em 0;
+}
+.animated-progress-bar-bg {
+  background: #23283a;
+  width: 88%;
+  height: 18px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px #0002;
+  margin-bottom: 0.4em;
+  position: relative;
+}
+.animated-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #b9f2ff, #78c5d6 80%);
+  border-radius: 10px;
+  width: 0%; /* This will be set inline via style for animation */
+  transition: width 1.6s cubic-bezier(.56,.04,.41,1.01);
+}
+.animated-bar-label {
+  color: #b9f2ff;
+  font-size: 1.05em;
+  font-weight: 600;
+}
+
+/* Activity feed */
+.activity-feed {
+  margin: 2.5em auto 1.8em auto;
+  background: #22263b;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px #0002;
+  max-width: 480px;
+  padding: 0.8em 1.4em 1.2em 1.4em;
+}
+.activity-feed h4 {
+  margin-bottom: 0.5em;
+  color: #b9f2ff;
+  font-size: 1.08em;
+  font-weight: bold;
+}
+.activity-feed ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.activity-feed li {
+  font-size: 1em;
+  color: #e0e0e0;
+  padding: 0.38em 0;
+  border-bottom: 1px solid #3a3f58;
+}
+.activity-type {
+  color: #ffe066;
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+.activity-date {
+  color: #b9f2ff;
+  font-size: 0.97em;
+  margin-left: 0.9em;
+}
+
+/* Motivational Quote */
+.motivation-quote {
+  text-align: center;
+  margin: 2em 0 1.2em 0;
+  font-size: 1.12em;
+  color: #b9f2ff;
+  font-style: italic;
+}
+.motivation-quote q {
+  font-size: 1.18em;
+  color: #fff;
+  font-style: italic;
+}
+.motivation-quote span {
+  display: block;
+  margin-top: 0.25em;
+  color: #78c5d6;
+  font-size: 1em;
+  font-style: normal;
 }

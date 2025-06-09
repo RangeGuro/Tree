@@ -12,6 +12,8 @@ export default function Navbar() {
         <NavLink to="/achievements">Achievements</NavLink>
         <NavLink to="/learned-skills">Learned Skills</NavLink>
         <NavLink to="/skill-tree">Skill Tree</NavLink>
+        <NavLink to="/timeline">Timeline</NavLink>
+
       </nav>
     </div>
   );

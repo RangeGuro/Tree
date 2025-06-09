@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSkillTree } from "../context/SkillTreeContext";
 import SkillNodeModal from "./SkillNodeModal";
 import * as d3 from "d3";
@@ -14,9 +14,23 @@ function levelColor(level: number, maxLevel: number) {
   return scale(pct);
 }
 
+function matchesSkill(skill: SkillNode, query: string): boolean {
+  if (!query.trim()) return false;
+  const q = query.toLowerCase();
+  if (skill.name.toLowerCase().includes(q)) return true;
+  if (skill.description && skill.description.toLowerCase().includes(q)) return true;
+  if ((skill as any).tags && Array.isArray((skill as any).tags)) {
+    if ((skill as any).tags.some((t: string) => t.toLowerCase().includes(q))) return true;
+  }
+  return false;
+}
+
 const width = 800, height = 600, center = {x: width/2, y: height/2};
 
-const SkillTree: React.FC = () => {
+interface SkillTreeProps {
+  searchQuery?: string;
+}
+const SkillTree: React.FC<SkillTreeProps> = ({ searchQuery = "" }) => {
   const { skills } = useSkillTree();
   const [selected, setSelected] = useState<SkillNode | null>(null);
 
@@ -29,6 +43,16 @@ const SkillTree: React.FC = () => {
     x: center.x + Math.cos((n.position.angle / 180) * Math.PI) * n.position.radius,
     y: center.y + Math.sin((n.position.angle / 180) * Math.PI) * n.position.radius
   }));
+
+  // Compute highlight/fade for all nodes
+  const nodeHighlight = useMemo(() => {
+    if (!searchQuery.trim()) return {};
+    const result: Record<string, boolean> = {};
+    for (const n of nodes) {
+      if (matchesSkill(n, searchQuery)) result[n.id] = true;
+    }
+    return result;
+  }, [searchQuery, nodes]);
 
   // Render lines (edges)
   const lines = [];
@@ -57,42 +81,49 @@ const SkillTree: React.FC = () => {
   }
 
   // Render skill nodes
-  const nodeCircles = nodes.map(n => (
-    <g
-      key={n.id}
-      tabIndex={0}
-      onClick={() => setSelected(n)}
-      style={{cursor: "pointer"}}
-    >
-      <circle
-        cx={n.x}
-        cy={n.y}
-        r={35}
-        fill={levelColor(n.level, n.maxLevel)}
-        stroke="#fff"
-        strokeWidth={n.level === n.maxLevel ? 6 : 2}
-      />
-      <text
-        x={n.x}
-        y={n.y + 5}
-        textAnchor="middle"
-        fontWeight="bold"
-        fontSize={15}
-        fill="#23283a"
+  const nodeCircles = nodes.map(n => {
+    const isHighlighted = !!nodeHighlight[n.id];
+    const faded = searchQuery.trim() && !isHighlighted;
+    return (
+      <g
+        key={n.id}
+        tabIndex={0}
+        onClick={() => setSelected(n)}
+        style={{cursor: "pointer", opacity: faded ? 0.23 : 1, transition: "opacity 0.2s"}}
       >
-        {n.name}
-      </text>
-      <text
-        x={n.x}
-        y={n.y + 27}
-        textAnchor="middle"
-        fontSize={12}
-        fill="#fff"
-      >
-        Lv {n.level}/{n.maxLevel}
-      </text>
-    </g>
-  ));
+        <circle
+          cx={n.x}
+          cy={n.y}
+          r={35}
+          fill={levelColor(n.level, n.maxLevel)}
+          stroke={isHighlighted ? "#f7e146" : "#fff"}
+          strokeWidth={n.level === n.maxLevel ? 6 : 2}
+          style={isHighlighted ? {
+            filter: "drop-shadow(0 0 14px #ffe066dd)"
+          } : undefined}
+        />
+        <text
+          x={n.x}
+          y={n.y + 5}
+          textAnchor="middle"
+          fontWeight="bold"
+          fontSize={15}
+          fill="#23283a"
+        >
+          {n.name}
+        </text>
+        <text
+          x={n.x}
+          y={n.y + 27}
+          textAnchor="middle"
+          fontSize={12}
+          fill="#fff"
+        >
+          Lv {n.level}/{n.maxLevel}
+        </text>
+      </g>
+    );
+  });
 
   return (
     <div style={{margin: "0 auto", width: width, height: height, position: "relative"}}>
